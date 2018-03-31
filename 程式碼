@@ -1,0 +1,134 @@
+//CHECK POINT 1
+const int LED = 7;
+void setup()
+{
+    Serial.begin(9600);
+    pinMode(LED,OUTPUT);
+    Serial.println("Hello,World!");
+}
+
+void loop() 
+{
+    boolean val;
+    if (Serial.available())
+    {
+        val=Serial.read();
+        if (val=='1')
+        {
+            digitalWrite(LED,HIGH);
+            Serial.println("LED ON");
+        }
+        else if (val=='0')
+        {
+            digitalWrite(LED,LOW);
+            Serial.println("LED OFF");
+        }
+    }
+}
+//CHECK POINT 2
+const int pin1=14;
+double analogin;
+void setup()
+{
+    Serial.begin(9600);
+    pinMode(pin1,OUTPUT);
+    analogin=0;
+}
+
+void loop()
+{
+    int i;
+    double Vin;
+    for(i=0;i<=5;i++)
+    {
+         analogin=0.7*analogin+0.3*analogRead(pin1);
+    }
+    Serial.print("analogin:");
+    Serial.println(analogin);
+    Serial.print("Vin:");
+    Vin=analogin*2.5/4095;
+    Serial.println(Vin);
+    delay(2000);
+}
+//CHECK POINT 3
+const byte potPin=14;
+float val;
+float sensorValue;
+float sensorVoltage;
+float R1;
+float R2;
+float ResisterValue; 
+void setup()
+{
+    Serial.begin(9600);
+    pinMode(potPin,OUTPUT);
+    ResisterValue=990000;
+    sensorValue=0;
+    sensorVoltage=0;
+    R1=0;
+}
+
+void loop()
+{
+    int i;
+    int Vin=2.5;
+
+    for(i=0;i<=19;i++)
+    {
+         sensorValue=sensorValue*0.7+0.3*analogRead(potPin);
+         delay(0.5);
+    }
+    Serial.print("sensorValue:");    //印出讀值
+    Serial.println(sensorValue);
+    
+    sensorVoltage = sensorValue*2.5/4095;  //印出電壓值
+    Serial.print("sensorVoltage:");
+    Serial.println(sensorVoltage);
+    
+    R1 = sensorVoltage*ResisterValue/Vin;   //印出R1值
+    Serial.print("R1:");
+    Serial.println(R1);
+    
+    delay(2000);
+}
+//CHECK POINT 4
+const byte potPin=14;
+float val;
+float sensorValue;
+float sensorVoltage;
+float R1;
+float R2;
+float ResisterValue; 
+void setup()
+{
+    Serial.begin(9600);
+    pinMode(potPin,OUTPUT);
+    ResisterValue=990000;
+    sensorValue=0;
+    sensorVoltage=0;
+    R1=0;
+}
+
+void loop()
+{
+    int i;
+    int Vin=2.5;
+
+    for(i=0;i<=19;i++)
+    {
+         sensorValue=sensorValue*0.7+0.3*analogRead(potPin);
+         delay(0.5);
+    }
+    Serial.print("sensorValue:");    //印出讀值
+    Serial.println(sensorValue);
+    
+    sensorVoltage = sensorValue*2.5/4095;  //印出電壓值
+    Serial.print("sensorVoltage:");
+    Serial.println(sensorVoltage);
+    
+    R1 = sensorVoltage*ResisterValue/Vin;   //印出R1值
+    Serial.print("R1:");
+    Serial.println(R1);
+    
+    delay(3000);
+}
